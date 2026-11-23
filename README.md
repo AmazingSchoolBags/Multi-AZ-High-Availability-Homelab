@@ -91,23 +91,21 @@ flowchart TB
 | [Sécurité](docs/SECURITE.md) | Gestion des secrets et règles de publication |
 | [Limites et roadmap](docs/LIMITES-ET-ROADMAP.md) | SPOF, observabilité, HA physique |
 | [Import des scripts source](docs/IMPORT-SOURCES.md) | Méthode sûre pour intégrer les originaux du serveur |
-| [Exemples historiques anonymisés](examples/legacy-flask/README.md) | Maquette Flask / HAProxy / Redis issue d'une copie revue avec Codex |
-| [Audit Codex + revue complémentaire](docs/AUDIT-SOURCES-CODEX.md) | Contrôles statiques effectués et limites |
+| [Première maquette Flask](examples/legacy-flask/README.md) | Premiers essais de répartition HTTP et configurations de référence |
+| [Guide de reconstruction](docs/GUIDE-DE-RECONSTRUCTION.md) | Étapes, commandes de vérification et explications techniques |
 | [Inventaire des originaux exclus](docs/ORIGINAUX-EXCLUS.md) | Scripts privés non publiés et travaux restants |
 
-## Code source et exemples
+## Scripts et configurations
 
-- **Laboratoire Vikunja actuel :** [exemple HAProxy SQL + HTTP](examples/haproxy.cfg.example), [Compose Vikunja avec placeholders](examples/vikunja.compose.example.yaml), [contrôle de santé lecture seule](scripts/check-health-readonly.sh).
-- **Maquette initiale Flask :** [cloud-init et Compose anonymisés](examples/legacy-flask/README.md), [configuration HAProxy d'exemple](examples/legacy-flask/lb/haproxy.cfg).
-- **Outils génériques :** [contrôles HTTP](scripts/check-http-health.sh) et [test d'intégrité S3](scripts/test-garage-s3.sh) (**écrit et supprime un objet** dans un bucket de test ; nécessite une configuration HTTPS appropriée).
+Les [configurations de référence](examples/) présentent le routage HAProxy, un service Vikunja et la première maquette Flask. Les scripts [check-health-readonly.sh](scripts/check-health-readonly.sh), [check-http-health.sh](scripts/check-http-health.sh) et [test-garage-s3.sh](scripts/test-garage-s3.sh) servent aux vérifications ; le dernier **écrit et supprime un objet** dans un bucket de test.
 
-**Les exemples ne sont pas des manifests du déploiement réel et ne doivent pas être exécutés tels quels.** Les véritables scripts d'administration et d'injection de panne restent hors du dépôt tant qu'ils ne sont pas audités ; voir l'[inventaire des exclus](docs/ORIGINAUX-EXCLUS.md).
+Pour comprendre la construction et la remise en service, consulter le [guide de reconstruction](docs/GUIDE-DE-RECONSTRUCTION.md). Les configurations sont fournies comme références : elles nécessitent une adaptation à l'environnement et ne constituent pas une installation automatique complète.
 
 ## Transparence technique
 
 **Points de défaillance uniques :** hôte Proxmox, HAProxy central et Redis central. Aucune garantie de disponibilité en cas de panne physique de l'hôte. Le premier essai Garage sous panne d'AZ1 a produit des timeouts ; le second a réussi, sans que la cause des premiers échecs soit définitivement établie.
 
-**Code publié :** documentation, exemples anonymisés issus d'une copie revue avec Codex et scripts génériques de contrôle. **Les scripts d'administration originaux et les configurations de production du laboratoire ne sont pas publiés.** Aucun mot de passe, clé SSH, token ou fichier .env réel n'a sa place ici.
+**Code publié :** configurations de référence et scripts de contrôle. Les scripts d'administration originaux, les données persistantes et les identifiants du laboratoire ne figurent pas dans ce dépôt.
 
 ## Références
 
