@@ -1,0 +1,40 @@
+# Authentification et secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+id_ed25519*
+**/.aws/
+**/.ssh/
+**/.config/azlab/
+**/secrets/
+**/private/
+
+# Données persistantes, dumps et artefacts
+**/data/
+**/meta/
+**/backups/
+**/s3-tests/
+*.sql
+*.dump
+*.sqlite
+*.db
+*.log
+*.pcap
+*.bak
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+*.auto.tfvars
+
+# Fichiers locaux
+.DS_Store
+Thumbs.db
+__pycache__/
+.venv/
+.idea/
+.vscode/
