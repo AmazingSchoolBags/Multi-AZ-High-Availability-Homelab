@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# Contrôle non destructif sur l'hôte Ubuntu du lab. Aucun secret lu.
 set -uo pipefail
 command -v curl >/dev/null || { echo "curl introuvable" >&2; exit 2; }
 failure=0
