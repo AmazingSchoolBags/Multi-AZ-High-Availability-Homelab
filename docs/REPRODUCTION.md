@@ -1,4 +1,4 @@
-# Reproduire le principe du laboratoire
+# Reproduction de l'architecture
 
 > Document de conception, pas procédure de déploiement automatisée validée. Les exemples ne sont pas les configurations originales d'Ubuntu.
 
@@ -25,7 +25,11 @@ Le projet ne reproduit **pas** de véritables AZ physiques : il dépend d'un **s
 - [Vikunja Compose](../examples/vikunja.compose.example.yaml) : exemple d'une seule AZ avec placeholders explicites ; ne pas déployer tel quel.
 - [Diagnostic lecture seule](../scripts/check-health-readonly.sh) : contrôles de santé HTTP/Patroni, sans lecture de secrets.
 
-Les véritables configurations Garage, Patroni et Compose utilisées lors des essais ne sont pas dans ce dépôt : elles requièrent inspection et anonymisation depuis Ubuntu.
+Le déploiement complet dépend des configurations locales de Garage, Patroni et Compose. Les exemples du dépôt ne suffisent pas à reconstruire automatiquement les services.
+
+## Guide pratique
+
+Le [guide de reconstruction](GUIDE-DE-RECONSTRUCTION.md) présente l'ordre de construction, les flux et les commandes de contrôle utilisés dans le laboratoire.
 
 ## Périmètre des tests déjà prouvés
 
