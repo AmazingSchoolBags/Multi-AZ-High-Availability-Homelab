@@ -1,13 +1,9 @@
-# MODELE DOCUMENTAIRE : ne pas lancer tel quel ni sur le lab actif.
-# Chaque valeur REPLACE_ME doit être fournie hors du dépôt.
-# Les secrets doivent être uniques, forts, identiques pour les 3 AZ
-# quand c'est le même paramètre partagé (notamment service.secret).
 services:
   vikunja:
     image: vikunja/vikunja:2.8.0
     restart: unless-stopped
     ports:
-      - "3456:3456"  # Autoriser via pare-feu UNIQUEMENT depuis HAProxy du LAN privé.
+      - "3456:3456"
     environment:
       VIKUNJA_DATABASE_TYPE: postgres
       VIKUNJA_DATABASE_HOST: REPLACE_ME_SQL_PROXY_HOST
