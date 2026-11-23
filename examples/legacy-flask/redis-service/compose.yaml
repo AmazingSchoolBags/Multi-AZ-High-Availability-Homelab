@@ -1,0 +1,11 @@
+{
+  "services": {
+    "redis": {
+      "image": "redis:7",
+      "restart": "unless-stopped",
+      "command": ["redis-server", "--appendonly", "yes", "--protected-mode", "yes"],
+      "volumes": ["redis-data:/data"]
+    }
+  },
+  "volumes": {"redis-data": {}}
+}
