@@ -1,5 +1,3 @@
-# EXEMPLE ANONYMISE : ne remplace pas la configuration du lab en service.
-# Valider avec haproxy -c -f <fichier> avant tout usage.
 global
   log stdout format raw local0
   maxconn 1000
