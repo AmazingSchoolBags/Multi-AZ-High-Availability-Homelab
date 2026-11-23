@@ -11,7 +11,7 @@ Ce dépôt est **public**. Aucun fichier de production ou secret de laboratoire 
 - Configurations complètes avec domaines internes, comptes de service ou jetons.
 - Fichiers personnels présents dans le serveur hôte.
 
-Ne jamais transmettre de clé privée ou token GitHub à un assistant.
+Ne jamais partager de clé privée, de jeton d'accès ou de fichier d'authentification.
 
 ## Publication du code source
 
