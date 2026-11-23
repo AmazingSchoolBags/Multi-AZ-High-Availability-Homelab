@@ -1,8 +1,8 @@
-# Exemples historiques Flask / HAProxy (anonymisés)
+# Première maquette : Flask et HAProxy
 
 > **Sous-projet documentaire, pas le déploiement Vikunja actuel.**
 >
-> Ces fichiers proviennent d'une **copie locale** préparée avec Codex à partir d'un extrait des scripts d'origine. Ils ont été anonymisés puis soumis à un contrôle statique. Le laboratoire final documenté à la racine utilise **Vikunja 2.8.0, HAProxy 3.2, PostgreSQL/Patroni et Garage S3** : les versions, ports et exemples de cette section ne doivent pas être pris pour son déploiement exact.
+> Cette première maquette servait à valider la répartition HTTP avant l'intégration de Vikunja, PostgreSQL/Patroni et Garage S3. Les fichiers ci-dessous sont des exemples de configuration ; ils ne représentent pas le déploiement final.
 
 ## Contenu
 
@@ -49,6 +49,6 @@ bash -n ../../scripts/test-garage-s3.sh
 
 ## Traçabilité
 
-- [Rapport de sécurité de la copie Codex](../../docs/AUDIT-SOURCES-CODEX.md).
-- [Inventaire des 14 originaux exclus et travaux restant à auditer](../../docs/ORIGINAUX-EXCLUS.md).
-- [Architecture et tests réels du lab final](../../README.md).
+- [Architecture et résultats du laboratoire final](../../README.md).
+- [Guide de reconstruction](../../docs/GUIDE-DE-RECONSTRUCTION.md).
+- [Scripts d'administration non inclus](../../docs/ORIGINAUX-EXCLUS.md).
