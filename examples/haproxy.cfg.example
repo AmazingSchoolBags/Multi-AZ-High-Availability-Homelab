@@ -1,0 +1,43 @@
+# EXEMPLE ANONYMISE : ne remplace pas la configuration du lab en service.
+# Valider avec haproxy -c -f <fichier> avant tout usage.
+global
+  log stdout format raw local0
+  maxconn 1000
+
+defaults
+  log global
+  mode http
+  option httplog
+  timeout connect 5s
+  timeout client 60s
+  timeout server 60s
+
+frontend vikunja_front
+  bind :8081
+  mode http
+  default_backend vikunja_backend
+
+backend vikunja_backend
+  mode http
+  balance roundrobin
+  option httpchk GET /health
+  http-check expect status 200
+  default-server inter 3s fall 2 rise 2
+  server vm-az1 10.97.0.8:3456 check
+  server vm-az2 10.97.1.179:3456 check
+  server vm-az3 10.97.2.141:3456 check
+
+frontend postgres_front
+  bind :5432
+  mode tcp
+  option tcplog
+  default_backend postgres_primary
+
+backend postgres_primary
+  mode tcp
+  option httpchk GET /primary
+  http-check expect status 200
+  default-server inter 2s fall 2 rise 2 on-marked-down shutdown-sessions
+  server db-az1 10.97.0.14:5432 check port 8008
+  server db-az2 10.97.1.43:5432 check port 8008
+  server db-az3 10.97.2.128:5432 check port 8008
