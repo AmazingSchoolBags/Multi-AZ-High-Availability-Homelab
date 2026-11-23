@@ -50,7 +50,6 @@ trap 'exit 130' INT
 trap 'exit 143' TERM
 printf 'Multi-AZ S3 smoke test\n' > "$tmp/input"
 
-# Try cleanup even when the upload response is lost.
 uploaded=true
 if ! s3 "$S3_WRITE_ENDPOINT" put-object --bucket "$S3_TEST_BUCKET" \
   --key "$key" --body "$tmp/input"; then
