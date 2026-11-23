@@ -1,0 +1,23 @@
+sequenceDiagram
+  autonumber
+  participant Admin as Opérateur
+  participant M as Multipass
+  participant P as Patroni / etcd
+  participant AZ2 as db-az2 (Primary)
+  participant AZ3 as db-az3 (Sync Standby)
+  participant HA as HAProxy SQL
+  participant App as Vikunja
+
+  Admin->>M: Arrêt AZ2
+  M-xAZ2: Arrêt forcé
+  P->>P: Détection et élection
+  P->>AZ3: Promotion
+  AZ3-->>P: Primary en timeline 4
+  Note over Admin,AZ3: Détecté après 36 s
+  App->>HA: Première tentative
+  HA--xApp: Connexion fermée
+  App->>HA: Nouvelle tentative
+  HA->>AZ3: SQL via /primary
+  AZ3-->>App: Transaction réussie
+  Admin->>M: Réactivation AZ2
+  P->>AZ2: Retour comme Replica TL4
