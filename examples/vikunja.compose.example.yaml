@@ -1,0 +1,27 @@
+# MODELE DOCUMENTAIRE : ne pas lancer tel quel ni sur le lab actif.
+# Chaque valeur REPLACE_ME doit être fournie hors du dépôt.
+# Les secrets doivent être uniques, forts, identiques pour les 3 AZ
+# quand c'est le même paramètre partagé (notamment service.secret).
+services:
+  vikunja:
+    image: vikunja/vikunja:2.8.0
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:3456:3456"
+    environment:
+      VIKUNJA_DATABASE_TYPE: postgres
+      VIKUNJA_DATABASE_HOST: REPLACE_ME_SQL_PROXY_HOST
+      VIKUNJA_DATABASE_USER: vikunja
+      VIKUNJA_DATABASE_DATABASE: vikunja
+      VIKUNJA_DATABASE_PASSWORD: REPLACE_ME_PRIVATE_PASSWORD
+      VIKUNJA_SERVICE_PUBLICURL: REPLACE_ME_PUBLIC_URL
+      VIKUNJA_SERVICE_SECRET: REPLACE_ME_SHARED_SECRET
+      VIKUNJA_REDIS_ENABLED: "true"
+      VIKUNJA_REDIS_HOST: REPLACE_ME_REDIS_HOST_PORT
+      VIKUNJA_REDIS_PASSWORD: REPLACE_ME_PRIVATE_REDIS_PASSWORD
+      VIKUNJA_FILES_TYPE: s3
+      VIKUNJA_FILES_S3_ENDPOINT: REPLACE_ME_GARAGE_S3_ENDPOINT
+      VIKUNJA_FILES_S3_BUCKET: vikunja-files
+      VIKUNJA_FILES_S3_REGION: garage
+      VIKUNJA_FILES_S3_ACCESSKEY: REPLACE_ME_PRIVATE_S3_ACCESS_KEY
+      VIKUNJA_FILES_S3_SECRETKEY: REPLACE_ME_PRIVATE_S3_SECRET_KEY
