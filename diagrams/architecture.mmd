@@ -1,0 +1,35 @@
+flowchart TB
+  USER["Client distant / Firefox"] --> VPN["Routeur Tailscale indépendant"]
+  VPN --> LB["HAProxy central<br/>HTTP 8081 · SQL 5432"]
+
+  subgraph SIM["Multipass sur un seul hôte Proxmox"]
+    direction LR
+    subgraph AZ1["Zone 1"]
+      WEB1["Vikunja"] --> S31[("Garage S3")]
+      DB1[("PostgreSQL + Patroni + etcd")]
+    end
+    subgraph AZ2["Zone 2"]
+      WEB2["Vikunja"] --> S32[("Garage S3")]
+      DB2[("PostgreSQL + Patroni + etcd")]
+    end
+    subgraph AZ3["Zone 3"]
+      WEB3["Vikunja"] --> S33[("Garage S3")]
+      DB3[("PostgreSQL + Patroni + etcd")]
+    end
+  end
+
+  LB --> WEB1 & WEB2 & WEB3
+  WEB1 & WEB2 & WEB3 --> SQL["SQL via Patroni /primary"]
+  SQL --> DB1 & DB2 & DB3
+  WEB1 & WEB2 & WEB3 --> REDIS[("Redis central · SPOF")]
+  S31 <--> S32
+  S32 <--> S33
+  S31 <--> S33
+  DB1 <-.réplication.-> DB2
+  DB2 <-.réplication.-> DB3
+  classDef db fill:#d1fae5,stroke:#059669,color:#064e3b;
+  classDef core fill:#dbeafe,stroke:#2563eb,color:#1e3a8a;
+  classDef spof fill:#ffedd5,stroke:#ea580c,color:#7c2d12;
+  class DB1,DB2,DB3,S31,S32,S33 db;
+  class WEB1,WEB2,WEB3 core;
+  class LB,REDIS spof;
